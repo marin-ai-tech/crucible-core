@@ -1,0 +1,15 @@
+[package]
+name = "crucible-ecs"
+description = "Core ECS with entities, components, events, and change tracking"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-ecs-macros.workspace = true
+tracing = "0.1.44"
+
+[lints]
+workspace = true

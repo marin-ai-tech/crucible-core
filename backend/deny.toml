@@ -1,0 +1,34 @@
+# Run `cargo deny check` from backend/ to check dependency licenses, sources and advisories.
+#
+# The backend is distributed under `MIT OR Apache-2.0`. The allowlist below excludes
+# copyleft licenses such as GPL, AGPL, LGPL and MPL-2.0, along with Ms-PL, Ms-RL,
+# EPL, CDDL, EUPL and CC-BY-SA. Changes to the allowlist require the owner's review.
+
+[graph]
+all-features = true
+
+[licenses]
+confidence-threshold = 0.9
+# An allowlist entry may be reserved for a future dependency.
+unused-allowed-license = "allow"
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Zlib",
+    "Unicode-3.0",
+]
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+# Permit workspace path dependencies without version requirements.
+allow-wildcard-paths = true
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

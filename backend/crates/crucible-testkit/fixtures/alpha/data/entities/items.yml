@@ -1,0 +1,15 @@
+- type: entity
+  id: AlBaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: item.rsi
+  - type: Damageable
+    max: 50
+
+- type: entity
+  id: AlSword
+  parent: AlBaseItem
+  components:
+  - type: MeleeWeapon
+    damage: 7

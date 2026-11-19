@@ -1,0 +1,43 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/crucible-ecs",
+    "crates/crucible-ecs-macros",
+    "crates/crucible-proto",
+    "crates/crucible-loc",
+    "crates/crucible-map",
+    "crates/crucible-physics",
+    "crates/crucible-loop",
+    "crates/crucible-ext",
+    "crates/crucible-players",
+    "crates/crucible-replication",
+    "crates/crucible-effects",
+    "crates/crucible-testkit",
+    "apps/admin",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.100"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.dependencies]
+crucible-ecs = { path = "crates/crucible-ecs" }
+crucible-ecs-macros = { path = "crates/crucible-ecs-macros" }
+crucible-proto = { path = "crates/crucible-proto" }
+crucible-loc = { path = "crates/crucible-loc" }
+crucible-map = { path = "crates/crucible-map" }
+crucible-physics = { path = "crates/crucible-physics" }
+crucible-loop = { path = "crates/crucible-loop" }
+crucible-ext = { path = "crates/crucible-ext" }
+crucible-players = { path = "crates/crucible-players" }
+crucible-replication = { path = "crates/crucible-replication" }
+crucible-testkit = { path = "crates/crucible-testkit" }
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }

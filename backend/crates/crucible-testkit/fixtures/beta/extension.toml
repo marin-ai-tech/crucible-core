@@ -1,0 +1,12 @@
+# Beta fixture extension for crucible-ext tests.
+[extension]
+id = "beta"
+version = "0.1.0"
+core = "^0.1"
+id_prefix = "Be"
+
+[modules]
+require = ["energy-networks"]
+
+[content]
+roots = ["data"]

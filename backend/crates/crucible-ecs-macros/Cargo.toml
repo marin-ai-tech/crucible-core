@@ -1,0 +1,19 @@
+[package]
+name = "crucible-ecs-macros"
+description = "Procedural macros for crucible-ecs, including field masks for per-field deltas"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0.107"
+quote = "1.0.47"
+syn = "2.0.119"
+
+[lints]
+workspace = true

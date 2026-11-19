@@ -1,0 +1,5 @@
+- type: entity
+  id: BeLamp
+  components:
+  - type: EnergyConsumer
+    draw: 2.5

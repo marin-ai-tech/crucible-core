@@ -1,0 +1,26 @@
+[package]
+name = "crucible-ext"
+description = "Core module and extension registration, manifests, and lifecycle"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-ecs.workspace = true
+crucible-proto.workspace = true
+crucible-loop.workspace = true
+# The spawn policy attaches a character to a player session.
+crucible-players.workspace = true
+# Core version ranges in manifests. License: MIT OR Apache-2.0.
+semver = "1.0.28"
+# Parsing `extension.toml`. License: MIT OR Apache-2.0.
+toml = "1.2.1"
+tracing = "0.1.44"
+
+[dev-dependencies]
+crucible-testkit.workspace = true
+
+[lints]
+workspace = true

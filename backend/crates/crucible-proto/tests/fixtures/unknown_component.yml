@@ -1,0 +1,6 @@
+- type: entity
+  id: Lamp
+  components:
+  - type: Sprite
+    sprite: a.rsi
+  - type: Mystery

@@ -1,0 +1,4 @@
+- type: entity
+  id: Lamp
+  title: ent-Lamp
+  note: ent-Lamp.desc

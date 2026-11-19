@@ -1,0 +1,49 @@
+# SS14-style fixture covering multiple inheritance, polymorphic values, and anchors.
+- type: entity
+  abstract: true
+  id: BaseThing
+  name: base thing
+  components:
+  - type: Sprite
+    sprite: Objects/thing.rsi
+  - type: PointLight
+    radius: 5
+    color: white
+
+- type: entity
+  abstract: true
+  id: BaseBreakable
+  components:
+  - type: Health
+    max: 100
+    behaviors:
+    - !type:DoActsBehavior
+      acts: [ "Destruction" ]
+    - !type:SpawnEntitiesBehavior
+      spawn:
+        Plank: 2
+    - !type:DoActsBehavior
+
+- type: entity
+  id: Crate
+  parent: [ BaseThing, BaseBreakable ]
+  name: crate
+  components:
+  - type: PointLight
+    radius: 8
+
+- type: entity
+  id: Lamp
+  parent: BaseThing
+  name: lamp
+  components:
+  - type: Label
+    text: &label "a lamp"
+  - type: Tagged
+    tags: [ Metal, Furniture ]
+
+- type: tag
+  id: Metal
+
+- type: tag
+  id: Furniture

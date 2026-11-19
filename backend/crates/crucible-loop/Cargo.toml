@@ -1,0 +1,19 @@
+[package]
+name = "crucible-loop"
+description = "Fixed-tick simulation loop with clocks, timers, system ordering, and round phases"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-ecs.workspace = true
+# Round flow identifies players by `NetUserId`.
+crucible-players.workspace = true
+# ChaCha8 streams provide reproducible simulation randomness. MIT OR Apache-2.0.
+rand_chacha = "0.9.0"
+tracing = "0.1.44"
+
+[lints]
+workspace = true

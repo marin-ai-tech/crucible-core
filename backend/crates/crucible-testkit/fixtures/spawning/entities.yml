@@ -1,0 +1,25 @@
+# Entity spawn prototypes covering multiple inheritance and an abstract prototype.
+- type: entity
+  id: BaseLit
+  abstract: true
+  components:
+  - type: Light
+    radius: 5
+    color: white
+
+- type: entity
+  id: BaseSturdy
+  abstract: true
+  components:
+  - type: Health
+    max: 100
+
+- type: entity
+  id: Lantern
+  parent: [ BaseLit, BaseSturdy ]
+  name: lantern
+  components:
+  - type: Light
+    radius: 8
+  - type: Label
+    text: lantern

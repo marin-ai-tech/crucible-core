@@ -1,0 +1,10 @@
+- type: entity
+  id: TestHuman
+  components:
+  - type: Physics
+    bodyType: KinematicController
+    fixedRotation: true
+  - type: InputMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4.5

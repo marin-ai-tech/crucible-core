@@ -1,0 +1,42 @@
+[package]
+name = "crucible-physics"
+description = "2D physics and movement adapted from MIT-licensed RobustToolbox and SS14 code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = ["world"]
+# ECS integration and the core physics module synchronize components with the simulation.
+# Disable the feature to build just the standalone physics solver.
+world = [
+    "dep:crucible-ecs",
+    "dep:crucible-proto",
+    "dep:crucible-loop",
+    "dep:crucible-ext",
+    "dep:crucible-map",
+    "dep:crucible-replication",
+    "dep:tracing",
+]
+
+[dependencies]
+# Platform-independent transcendental functions.
+libm = "=0.2.16"
+crucible-ecs = { workspace = true, optional = true }
+crucible-proto = { workspace = true, optional = true }
+crucible-loop = { workspace = true, optional = true }
+crucible-ext = { workspace = true, optional = true }
+crucible-map = { workspace = true, optional = true }
+crucible-replication = { workspace = true, optional = true }
+tracing = { version = "0.1.44", optional = true }
+
+[dev-dependencies]
+# Decode reference trajectory fixtures in the tests.
+serde_json = "=1.0.154"
+# Fixture extensions for testing ECS integration on an assembled server.
+crucible-testkit = { workspace = true }
+
+[lints]
+workspace = true

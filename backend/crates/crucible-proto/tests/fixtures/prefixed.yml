@@ -1,0 +1,7 @@
+- type: entity
+  id: Torch
+  name: torch
+
+- type: entity
+  id: ExLantern
+  name: lantern

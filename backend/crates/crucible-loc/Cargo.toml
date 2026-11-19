@@ -1,0 +1,16 @@
+[package]
+name = "crucible-loc"
+description = "Fluent localization and message key validation"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+# Licenses: fluent-bundle and unic-langid are Apache-2.0 OR MIT.
+fluent-bundle = "=0.16.0"
+unic-langid = "=0.9.6"
+
+[lints]
+workspace = true

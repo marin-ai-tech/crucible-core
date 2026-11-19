@@ -1,0 +1,23 @@
+[package]
+name = "crucible-testkit"
+description = "In-process test server and virtual clients"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-ecs.workspace = true
+crucible-proto.workspace = true
+crucible-loop.workspace = true
+crucible-ext.workspace = true
+crucible-map.workspace = true
+crucible-players.workspace = true
+crucible-replication.workspace = true
+
+[dev-dependencies]
+crucible-physics.workspace = true
+
+[lints]
+workspace = true

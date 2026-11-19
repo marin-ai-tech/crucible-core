@@ -1,0 +1,15 @@
+# Alpha fixture extension for crucible-ext tests.
+[extension]
+id = "alpha"
+version = "0.1.0"
+core = "^0.1"
+id_prefix = "Al"
+
+[modules]
+require = ["combat"]
+
+[content]
+roots = ["data"]
+
+[ignore]
+client_only = ["Sprite"]

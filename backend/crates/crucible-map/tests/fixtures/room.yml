@@ -1,0 +1,304 @@
+# Test map with one 12×9 grid and walls around the perimeter.
+# Includes TestHuman, 5 × TestCrate, and 6 × TestLamp (50 entities plus the map and grid).
+# SS14 map format 7, chunk format 7. TestPlating under the walls, TestFloor inside.
+meta:
+  format: 7
+  category: Map
+  engineVersion: 0.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 11/16/2026 00:00:00
+  entityCount: 52
+maps:
+- 1
+grids:
+- 2
+orphans: []
+nullspace: []
+tilemap:
+  0: TestEmpty
+  1: TestFloor
+  2: TestPlating
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: testbed
+    - type: Transform
+    - type: Map
+      mapPaused: False
+  - uid: 2
+    components:
+    - type: MetaData
+    - type: Transform
+      parent: 1
+      pos: 0,0
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+- proto: TestWall
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 2
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 2
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 2
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 2
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 2
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 2
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 2
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 2
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 8.5,0.5
+      parent: 2
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 9.5,0.5
+      parent: 2
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 10.5,0.5
+      parent: 2
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 11.5,0.5
+      parent: 2
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 2
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 11.5,1.5
+      parent: 2
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 2
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 11.5,2.5
+      parent: 2
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 2
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 11.5,3.5
+      parent: 2
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 2
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 11.5,4.5
+      parent: 2
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 2
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 11.5,5.5
+      parent: 2
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 2
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 11.5,6.5
+      parent: 2
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 2
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 11.5,7.5
+      parent: 2
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 2
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 2
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 2
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 2
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 4.5,8.5
+      parent: 2
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 5.5,8.5
+      parent: 2
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 2
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 2
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 2
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 2
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 10.5,8.5
+      parent: 2
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 11.5,8.5
+      parent: 2
+- proto: TestHuman
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 2
+- proto: TestCrate
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 2
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 2
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 2
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 9.5,6.5
+      parent: 2
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 9.5,2.5
+      parent: 2
+- proto: TestLamp
+  entities:
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 2
+      rot: 1.5707963267948966 rad
+    - type: TestLight
+      color: '#FFAA00FF'
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 10.5,1.5
+      parent: 2
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 2
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 10.5,7.5
+      parent: 2
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 2
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 2

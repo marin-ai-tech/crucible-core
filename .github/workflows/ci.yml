@@ -1,0 +1,45 @@
+# CI: every push to main and every pull request runs formatting, lint, tests and the dependency policy on Linux
+# with the pinned toolchain from backend/rust-toolchain.toml.
+# The release workflow runs the same checks again on a version tag; push main first and tag after this run is green.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install the pinned Rust toolchain
+        run: |
+          channel="$(sed -n 's/^channel = "\(.*\)"$/\1/p' rust-toolchain.toml)"
+          rustup toolchain install "${channel}" --profile minimal --component rustfmt,clippy
+          rustc --version
+
+      - uses: taiki-e/install-action@75a7c0f87bd666af3cdb75c5b9e9d03ab6044e6f # v2.90.6
+        with:
+          tool: cargo-deny@0.21.0
+
+      - name: Format
+        run: cargo fmt --all --check
+
+      - name: Lint
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+
+      - name: Test
+        run: cargo test --workspace --locked --no-fail-fast
+
+      - name: Dependency policy
+        run: cargo deny check

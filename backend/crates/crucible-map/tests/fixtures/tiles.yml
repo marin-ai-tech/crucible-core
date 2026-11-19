@@ -1,0 +1,17 @@
+# Test map tile definitions. The `tile` kind is defined by `register_tile_kind`.
+# The core assigns ID 0 to the empty tile (`empty: true`) and orders the rest by prototype ID.
+
+- type: tile
+  id: TestEmpty
+  name: test-tile-empty
+  empty: true
+
+- type: tile
+  id: TestPlating
+  name: test-tile-plating
+  isSubfloor: true
+
+- type: tile
+  id: TestFloor
+  name: test-tile-floor
+  baseTurf: TestPlating

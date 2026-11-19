@@ -1,0 +1,6 @@
+- type: entity
+  id: Lamp
+  name: 1.10
+  components:
+  - type: Label
+    text: yes

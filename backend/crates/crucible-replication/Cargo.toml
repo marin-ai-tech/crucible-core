@@ -1,0 +1,22 @@
+[package]
+name = "crucible-replication"
+description = "Server replication, visibility, state frames, and input buffering"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-ecs = { workspace = true }
+crucible-map = { workspace = true }
+crucible-players = { workspace = true }
+crucible-ext = { workspace = true }
+crucible-loop = { workspace = true }
+tracing = "0.1.44"
+
+[dev-dependencies]
+crucible-physics = { workspace = true }
+
+[lints]
+workspace = true

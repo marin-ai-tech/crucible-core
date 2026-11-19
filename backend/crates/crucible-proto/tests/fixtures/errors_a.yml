@@ -1,0 +1,5 @@
+- type: entity
+  id: Lamp
+  components:
+  - type: PointLight
+    glow: 3

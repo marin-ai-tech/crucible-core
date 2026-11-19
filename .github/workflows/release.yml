@@ -1,0 +1,103 @@
+# Release: on a version tag (v0.1.0), the verify job checks that the tag matches the workspace version in
+# backend/Cargo.toml and points to a commit on main, then runs format, lint, tests and the dependency policy with a
+# read-only token. The publish job attaches the source archive and its checksum to a GitHub release with the
+# changelog entry as notes; only this job can write to the repository.
+# Only repository administrators may create, move or delete v* tags (repository ruleset "Release tags"), so pushing
+# the tag is the owner's release approval.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: The tag matches the workspace version
+        id: version
+        run: |
+          version="$(sed -n '/^\[workspace\.package\]/,/^\[/s/^version = "\(.*\)"$/\1/p' backend/Cargo.toml)"
+          if [ -z "${version}" ] || [ "${GITHUB_REF_NAME}" != "v${version}" ]; then
+            echo "tag ${GITHUB_REF_NAME} does not match workspace version ${version}"
+            exit 1
+          fi
+          echo "version=${version}" >> "${GITHUB_OUTPUT}"
+
+      - name: The tag points to a commit on main
+        run: |
+          if ! git merge-base --is-ancestor "${GITHUB_SHA}" origin/main; then
+            echo "tag ${GITHUB_REF_NAME} points to ${GITHUB_SHA}, which is not on main"
+            exit 1
+          fi
+
+      - name: Install the pinned Rust toolchain
+        working-directory: backend
+        run: |
+          channel="$(sed -n 's/^channel = "\(.*\)"$/\1/p' rust-toolchain.toml)"
+          rustup toolchain install "${channel}" --profile minimal --component rustfmt,clippy
+          rustc --version
+
+      - uses: taiki-e/install-action@75a7c0f87bd666af3cdb75c5b9e9d03ab6044e6f # v2.90.6
+        with:
+          tool: cargo-deny@0.21.0
+
+      - name: Format, lint, tests and dependency policy
+        working-directory: backend
+        run: |
+          cargo fmt --all --check
+          cargo clippy --workspace --all-targets --locked -- -D warnings
+          cargo test --workspace --locked --no-fail-fast
+          cargo deny check
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      VERSION: ${{ needs.verify.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Release notes from the changelog
+        run: |
+          awk -v heading="## ${VERSION}" '
+            index($0, heading " ") == 1 || $0 == heading { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > "${RUNNER_TEMP}/release-notes.md"
+          if ! grep -q '[^[:space:]]' "${RUNNER_TEMP}/release-notes.md"; then
+            echo "CHANGELOG.md has no entry for ${VERSION}"
+            exit 1
+          fi
+
+      - name: Source archive and checksum
+        run: |
+          archive="crucible-core-${VERSION}.tar.gz"
+          git archive --format=tar.gz --prefix="crucible-core-${VERSION}/" -o "${RUNNER_TEMP}/${archive}" "${GITHUB_SHA}"
+          (cd "${RUNNER_TEMP}" && sha256sum "${archive}" > SHA256SUMS && cat SHA256SUMS)
+
+      - name: GitHub release with the archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          prerelease=()
+          case "${VERSION}" in *-*) prerelease=(--prerelease) ;; esac
+          gh release create "${GITHUB_REF_NAME}" \
+            "${RUNNER_TEMP}/crucible-core-${VERSION}.tar.gz" "${RUNNER_TEMP}/SHA256SUMS" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "Crucible Core ${VERSION}" --notes-file "${RUNNER_TEMP}/release-notes.md" \
+            --verify-tag "${prerelease[@]}"

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crucible · Engine admin</title>
+  <link rel="stylesheet" href="/dashboard.css">
+  <script type="module" src="/dashboard.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell topbar">
+      <p class="wordmark">Crucible <span>Admin</span></p>
+      <nav class="sections" aria-label="Sections">
+        <a href="#overview">Overview</a>
+        <a href="#metrics">Metrics</a>
+        <a href="#mechanics">Mechanics</a>
+        <a href="#logs">Logs</a>
+      </nav>
+      <span id="status" class="status" role="status">Connecting</span>
+    </div>
+  </header>
+  <main class="shell">
+    <h1>Engine admin</h1>
+    <p class="muted">Crucible runs a multiplayer simulation in fixed ticks. The active extension selects the rules and modules for this server.</p>
+    <noscript><p>The dashboard requires JavaScript to load metrics.</p></noscript>
+    <section id="overview" class="panel overview" aria-labelledby="overview-heading">
+      <div class="panel-heading">
+        <div>
+          <h2 id="overview-heading">Server process</h2>
+          <p id="process-detail" class="muted">Reading process status…</p>
+        </div>
+        <div class="actions">
+          <button id="start" class="primary" type="button" disabled>Start engine</button>
+          <button id="stop" type="button" disabled>Stop engine</button>
+        </div>
+      </div>
+      <p id="process-error" class="error" role="alert" hidden></p>
+      <dl class="engine-info">
+        <div><dt>Core version</dt><dd id="engine-version">—</dd></div>
+        <div><dt>Tick rate</dt><dd id="engine-rate">—</dd></div>
+        <div><dt>Loaded extension</dt><dd id="engine-extension">—</dd></div>
+      </dl>
+      <div class="modules">
+        <h3>Loaded modules</h3>
+        <ul id="modules"></ul>
+        <p id="engine-note" class="muted"></p>
+      </div>
+    </section>
+
+    <div id="metrics" class="heading">
+      <h2>Simulation metrics</h2>
+      <p id="window-label">Waiting for the latest window…</p>
+    </div>
+    <section aria-label="Latest measurements in this view" class="cards">
+      <article class="card">
+        <h2>Mean tick duration</h2>
+        <p class="value" id="mean">—</p>
+      </article>
+      <article class="card">
+        <h2>p95 tick duration</h2>
+        <p class="value" id="p95">—</p>
+      </article>
+      <article class="card">
+        <h2>p99 tick duration</h2>
+        <p class="value" id="p99">—</p>
+      </article>
+      <article class="card">
+        <h2>Skipped ticks</h2>
+        <p class="value" id="skipped">—</p>
+      </article>
+    </section>
+
+    <p id="error" class="error" role="alert" hidden></p>
+    <section class="panel" aria-labelledby="duration-heading">
+      <div class="panel-heading">
+        <h2 id="duration-heading">Tick duration (ms)</h2>
+        <ul class="legend" aria-label="Chart series">
+          <li><span class="key mean"></span>Mean</li>
+          <li><span class="key p95"></span>p95</li>
+          <li><span class="key p99"></span>p99</li>
+        </ul>
+      </div>
+      <canvas id="duration-chart" class="chart" role="img"
+          aria-label="Mean, p95, and p99 tick duration by window">
+        Read the exact values in the window data table.
+      </canvas>
+    </section>
+
+    <section class="panel" aria-labelledby="skips-heading">
+      <div class="panel-heading"><h2 id="skips-heading">Skipped ticks by window</h2></div>
+      <canvas id="skips-chart" class="chart small" role="img"
+          aria-label="Count of skipped ticks per sampling window">
+        Read the exact values in the window data table.
+      </canvas>
+    </section>
+
+    <section class="history" aria-labelledby="history-heading">
+      <div class="history-heading">
+        <div>
+          <h2 id="history-heading">Window history</h2>
+          <p id="range-label"></p>
+        </div>
+        <nav aria-label="History pages">
+          <button id="older" type="button" disabled>Older</button>
+          <button id="newer" type="button" disabled>Newer</button>
+          <button id="latest" type="button" disabled>Latest</button>
+        </nav>
+      </div>
+      <details>
+        <summary>Window data</summary>
+        <div class="table-scroll" tabindex="0" aria-label="Recorded tick metrics">
+          <table>
+            <thead><tr>
+              <th scope="col">Window end</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Ticks</th>
+              <th scope="col">Mean</th>
+              <th scope="col">p95</th>
+              <th scope="col">p99</th>
+              <th scope="col">Max</th>
+              <th scope="col">Skipped</th>
+              <th scope="col">Lagging iterations</th>
+            </tr></thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section id="mechanics" class="panel" aria-labelledby="mechanics-heading">
+      <div class="panel-heading">
+        <div><h2 id="mechanics-heading">Mechanics and tick phases</h2>
+          <p id="mechanics-note" class="muted">Waiting for a saved timing window…</p></div>
+      </div>
+      <div class="table-scroll" tabindex="0" aria-label="Work per mechanic and phase">
+        <table>
+          <thead><tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phase</th>
+            <th scope="col">Calls</th>
+            <th scope="col">Total duration</th>
+            <th scope="col">Max duration</th>
+          </tr></thead>
+          <tbody id="mechanics-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="logs" class="panel" aria-labelledby="logs-heading">
+      <div class="panel-heading">
+        <div><h2 id="logs-heading">Server logs</h2><p id="logs-note" class="muted">Reading logs…</p></div>
+        <button id="refresh-logs" type="button">Refresh logs</button>
+      </div>
+      <pre id="log-content" tabindex="0" aria-label="Recent server log output"></pre>
+    </section>
+
+    <details class="help">
+      <summary>Dashboard help</summary>
+      <p>Use Overview to start or stop the engine managed by this admin client. Choose Older in Window history to browse saved metrics, then Latest to resume live updates. Open Window data for the exact chart values.</p>
+    </details>
+  </main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+[package]
+name = "crucible-map"
+description = "Maps, grids, tiles, transforms, and spatial queries"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-ecs = { workspace = true }
+crucible-proto = { workspace = true }
+# Core maps module (`MapModule`) and component factories for loading maps.
+crucible-ext = { workspace = true }
+# Licensed under MIT OR Apache-2.0. Uses the same parser as `crucible-proto`.
+saphyr-parser = "=0.3.4"
+# Licensed under MIT OR Apache-2.0. SS14 maps encode chunk tiles as base64.
+base64 = "0.22.1"
+
+[dev-dependencies]
+# Fixture extensions for the void policy scenario on an assembled server.
+crucible-testkit = { workspace = true }
+
+[lints]
+workspace = true

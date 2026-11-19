@@ -1,0 +1,23 @@
+[package]
+name = "crucible-admin"
+description = "Local process console and telemetry dashboard for Crucible hosts"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+crucible-loop.workspace = true
+ctrlc = { version = "3.5.2", features = ["termination"] }
+rusqlite = { version = "0.43.0", features = ["bundled"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+tiny_http = "0.12"
+tracing = "0.1.44"
+
+[dev-dependencies]
+tempfile = "3.27.0"
+
+[lints]
+workspace = true

@@ -1,0 +1,7 @@
+- type: entity
+  id: Lamp
+  components:
+  - type: PointLight
+    radius: 5
+    color: white
+    radius: 8
